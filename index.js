@@ -74,6 +74,16 @@ app.get('/myItems', async(req,res)=>{
   const items = await cursor.toArray()
   res.send(items)
 })
+// -----------my Items delete----------------
+
+app.get('/myItems/:id', async(req,res)=>{
+  const id = req.params.id;
+  const query = {_id: ObjectId(id)}
+  const result = await inventoryCollection.deleteOne(query)
+  res.send(result)
+})
+
+
 }
 finally{}
 
