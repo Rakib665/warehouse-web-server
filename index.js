@@ -37,7 +37,7 @@ app.put('/inventory/:id', async (req, res) => {
   const id = req.params.id;
   console.log(id)
   const updateQuantity = req.body
-  console.log(updateQuantity.quantity)
+  // console.log(updateQuantity.quantity)
   const query = { _id: ObjectId(id) }
   const options = { upsert: true };
 
@@ -63,6 +63,16 @@ app.post('/inventory', async(req,res)=>{
   const addItem = req.body
   const newItem = inventoryCollection.insertOne(addItem)
   res.send(newItem)
+})
+
+// -----------my Items----------------
+app.get('/myItems', async(req,res)=>{
+  const email = req.query.email;
+  // console.log(email)
+  const query ={email:email};
+  const cursor = inventoryCollection.find(query)
+  const items = await cursor.toArray()
+  res.send(items)
 })
 }
 finally{}
