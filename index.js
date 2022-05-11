@@ -65,24 +65,6 @@ app.post('/inventory', async(req,res)=>{
   res.send(newItem)
 })
 
-// -----------my Items----------------
-app.get('/myItems', async(req,res)=>{
-  const email = req.query.email;
-  // console.log(email)
-  const query ={email:email};
-  const cursor = inventoryCollection.find(query)
-  const items = await cursor.toArray()
-  res.send(items)
-})
-// -----------my Items delete----------------
-
-app.delete('/myItems/:id', async(req,res)=>{
-  const id = req.params.id;
-  const query = {_id: ObjectId(id)}
-  const result = await inventoryCollection.deleteOne(query)
-  res.send(result)
-})
-
 
 }
 finally{}
